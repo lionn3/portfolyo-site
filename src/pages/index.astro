@@ -1,657 +1,1213 @@
 ---
-const tracks = [
+const projects = [
   {
-    id: 1,
-    title: "Rocket Rat - Main Theme & Boss Battle",
-    category: "Game Audio",
-    role: "Kompozisyon, Sentez & Miks (Ableton Live)",
-    duration: "02:14",
-    src: "/audio/demo-1.mp3",
-    desc: "Retro-modern synth dokuları, dinamik perküsyonlar ve boss savaşı enerji eğrisi."
+    id: "p1",
+    title: "Rocket Rat",
+    categoryKey: "catGame",
+    badge: "Game Audio",
+    year: "2026",
+    src: "/audio/rocket-rat-theme.mp3",
+    accent: "violet",
+    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop",
+    desc: {
+      en: "Original soundtrack & dynamic SFX created for an itch.io game jam. High-energy synth textures and boss fight loops.",
+      fr: "Bande originale et SFX dynamiques conçus pour une game jam itch.io. Textures synthétiques et boucles de combat."
+    }
   },
   {
-    id: 2,
-    title: "Vocal Exploration & Acoustic Study",
-    category: "Acoustique",
-    role: "Kompozisyon & Akustik Düzenleme",
-    duration: "01:45",
-    src: "/audio/demo-2.mp3",
-    desc: "Çağdaş vokal teknikleri ve klasik form analizi üzerine kompozisyon."
+    id: "p2",
+    title: "Festival Dramatique I",
+    categoryKey: "catTheater",
+    badge: "Theater Score",
+    year: "2026",
+    src: "/audio/theater-score-1.mp3",
+    accent: "amber",
+    image: "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?q=80&w=800&auto=format&fit=crop",
+    desc: {
+      en: "Original dramatic score and spatial cues composed for live stage production. Acoustic and electroacoustic layers.",
+      fr: "Musique originale dramatique et repères spatiaux composés pour la scène. Couches acoustiques et électroacoustiques."
+    }
   },
   {
-    id: 3,
-    title: "Modular Atmosphere & Ambient Loop",
-    category: "Sound Design",
-    role: "SFX & Modüler Doku Tasarımı",
-    duration: "03:10",
-    src: "/audio/demo-3.mp3",
-    desc: "İzometrik keşif oyunları için kesintisiz döngüye (loop) uygun atmosferik ses tasarımı."
+    id: "p3",
+    title: "Scène Contemporaine II",
+    categoryKey: "catTheater",
+    badge: "Theater Score",
+    year: "2026",
+    src: "/audio/theater-score-2.mp3",
+    accent: "amber",
+    image: "https://images.unsplash.com/photo-1514306191717-452ec28c7814?q=80&w=800&auto=format&fit=crop",
+    desc: {
+      en: "Atmospheric underscore and tension-driven sound design tailored for theatrical pacing and stage movement.",
+      fr: "Trame sonore atmosphérique et sound design dramatique adaptés au rythme théâtral et à la mise en scène."
+    }
+  },
+  {
+    id: "p4",
+    title: "Echoes of the Void",
+    categoryKey: "catConcept",
+    badge: "Game Audio",
+    year: "2026",
+    src: "/audio/echoes-void.mp3",
+    accent: "violet",
+    image: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=800&auto=format&fit=crop",
+    desc: {
+      en: "Speculative interactive exploration loop. Seamless ambient transitions and modular sound design.",
+      fr: "Boucle d'exploration interactive spéculative. Transitions ambiantes fluides et synthèse modulaire."
+    }
   }
 ];
 
-const categories = ["Tous", "Game Audio", "Sound Design", "Acoustique"];
-
-const skills = [
-  { name: "DAW & Audio", items: ["Ableton Live 12", "FL Studio", "ReaPlugs", "Audio Routing"] },
-  { name: "Spécialités", items: ["Game Audio & Loop Design", "Synthèse Sonore", "Mixage Stéréo", "Analyse Formelle"] },
-  { name: "Environnement", items: ["Windows 11", "Git / GitHub", "Web Audio API", "Interactive Media"] }
+const discography = [
+  {
+    title: "Album IV",
+    type: "Album",
+    year: "2026",
+    genre: "Electronic / OST",
+    cover: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
+    spotify: "#",
+    apple: "#",
+    youtube: "#"
+  },
+  {
+    title: "Ambient Studies",
+    type: "Album",
+    year: "2025",
+    genre: "Ambient",
+    cover: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=600&auto=format&fit=crop",
+    spotify: "#",
+    apple: "#",
+    youtube: "#"
+  },
+  {
+    title: "Orchestral & Stage",
+    type: "Album",
+    year: "2025",
+    genre: "Orchestral",
+    cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=600&auto=format&fit=crop",
+    spotify: "#",
+    apple: "#",
+    youtube: "#"
+  },
+  {
+    title: "Nocturne Digital",
+    type: "Single",
+    year: "2026",
+    genre: "Synth / Minimal",
+    cover: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=600&auto=format&fit=crop",
+    spotify: "#",
+    apple: "#",
+    youtube: "#"
+  }
 ];
 ---
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arhan Bora Egemen - Portfolio Audio & Composition</title>
+  <title>Arhan Bora Egemen — Composer & Sound Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #090a0c;
-      --card-bg: #121417;
-      --card-border: #1e2227;
-      --card-hover: #171a1f;
-      --accent: #3b82f6;
-      --accent-glow: rgba(59, 130, 246, 0.2);
-      --text-main: #f3f4f6;
-      --text-muted: #9ca3af;
-      --tag-bg: rgba(59, 130, 246, 0.1);
+      --bg-base: #0b0914;
+      --bg-glow: #18112c;
+      --card-bg: #151125;
+      --card-border: #261f3d;
+      --card-hover: #1d1732;
+      --accent-violet: #8b5cf6;
+      --accent-violet-glow: rgba(139, 92, 246, 0.35);
+      --accent-amber: #f59e0b;
+      --accent-amber-soft: #e0a96d;
+      --accent-amber-glow: rgba(245, 158, 11, 0.25);
+      --text-main: #f3f0f7;
+      --text-muted: #9ca0b0;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
-      background-color: var(--bg);
+      background-color: var(--bg-base);
+      background-image: 
+        radial-gradient(circle at 20% 10%, rgba(139, 92, 246, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 80% 30%, rgba(245, 158, 11, 0.08) 0%, transparent 45%);
       color: var(--text-main);
       font-family: 'Inter', sans-serif;
       line-height: 1.6;
-      padding-bottom: 140px;
+      padding-bottom: 130px;
+      overflow-x: hidden;
     }
 
     .container {
-      max-width: 920px;
+      max-width: 1140px;
       margin: 0 auto;
-      padding: 4rem 1.5rem;
+      padding: 0 1.5rem;
     }
 
-    /* Header */
-    header {
-      margin-bottom: 3.5rem;
+    /* Top Navigation Bar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      background: rgba(11, 9, 20, 0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 1.1rem 0;
     }
 
-    .badge {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      padding: 0.25rem 0.75rem;
-      background: var(--tag-bg);
-      color: var(--accent);
-      border-radius: 9999px;
-      margin-bottom: 1rem;
-      border: 1px solid rgba(59, 130, 246, 0.25);
-    }
-
-    h1 {
-      font-size: 2.25rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.75rem;
-    }
-
-    p.lead {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-      max-width: 680px;
-    }
-
-    .social-links {
-      margin-top: 1.25rem;
+    .nav-inner {
       display: flex;
-      gap: 1.25rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
 
-    .social-links a {
-      color: var(--text-muted);
-      font-size: 0.875rem;
+    .brand {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--text-main);
       text-decoration: none;
-      transition: color 0.2s ease;
+      white-space: nowrap;
     }
 
-    .social-links a:hover {
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding-bottom: 0.35rem;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
       color: var(--text-main);
     }
 
-    /* Section Headings */
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-amber), var(--accent-violet));
+      border-radius: 2px;
+    }
+
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-left: 1px solid var(--card-border);
+      border-right: 1px solid var(--card-border);
+      padding: 0 1rem;
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.82rem;
+      transition: color 0.2s;
+    }
+
+    .lang-btn.active {
+      color: var(--accent-amber);
+    }
+
+    .platform-icons {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .platform-icons a {
+      color: var(--text-muted);
+      transition: color 0.2s, transform 0.2s;
+      display: flex;
+      align-items: center;
+    }
+
+    .platform-icons a:hover {
+      color: var(--accent-amber-soft);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 5.5rem 0 4.5rem;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.1rem, 4.5vw, 3.3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.1rem;
+      color: var(--text-main);
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--accent-amber-soft);
+      font-weight: 400;
+    }
+
+    /* Section Headers */
+    .section {
+      margin-bottom: 4.5rem;
+    }
+
     .section-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
       flex-wrap: wrap;
       gap: 1rem;
     }
 
-    h2.section-title {
-      font-size: 1.25rem;
+    .section-title {
+      font-size: 1.35rem;
       font-weight: 600;
       letter-spacing: -0.01em;
     }
 
-    /* Filter Buttons */
-    .filter-group {
+    .filter-pills {
       display: flex;
       gap: 0.5rem;
       flex-wrap: wrap;
     }
 
-    .filter-btn {
+    .pill {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       color: var(--text-muted);
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       font-weight: 500;
-      padding: 0.35rem 0.75rem;
-      border-radius: 6px;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.2s;
     }
 
-    .filter-btn:hover {
-      border-color: #374151;
+    .pill:hover {
+      border-color: var(--accent-violet);
       color: var(--text-main);
     }
 
-    .filter-btn.active {
-      background: var(--accent);
+    .pill.active {
+      background: linear-gradient(135deg, var(--accent-violet), #6d28d9);
       color: #fff;
-      border-color: var(--accent);
+      border-color: transparent;
+      box-shadow: 0 0 14px var(--accent-violet-glow);
     }
 
-    /* Tracks */
-    .track-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-      margin-bottom: 4rem;
+    /* Selected Works Grid */
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.25rem;
     }
 
-    .track-card {
+    .work-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 1.15rem 1.4rem;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .work-card:hover {
+      transform: translateY(-4px);
+      background: var(--card-hover);
+      border-color: #3b2d5e;
+    }
+
+    .work-card.playing {
+      border-color: var(--accent-amber);
+      box-shadow: 0 0 22px var(--accent-amber-glow);
+    }
+
+    .work-thumb {
+      position: relative;
+      height: 155px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .work-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .work-card:hover .work-thumb img {
+      transform: scale(1.05);
+    }
+
+    .work-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(11, 9, 20, 0.78);
+      backdrop-filter: blur(6px);
+      color: var(--text-main);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .work-body {
+      padding: 1rem 1.1rem;
+      display: flex;
+       flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .work-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .work-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1.5rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      padding-top: 0.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .track-card:hover {
-      background: var(--card-hover);
-      border-color: #2e353f;
-      transform: translateY(-1px);
-    }
-
-    .track-card.active {
-      border-color: var(--accent);
-      box-shadow: 0 0 20px var(--accent-glow);
-    }
-
-    .track-info { flex: 1; }
-    .track-tag {
-      font-size: 0.7rem;
-      color: var(--accent);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.2rem;
-    }
-
-    .track-name {
-      font-size: 1.05rem;
+    .work-title {
+      font-size: 0.95rem;
       font-weight: 600;
       color: var(--text-main);
-      margin-bottom: 0.2rem;
     }
 
-    .track-meta {
-      font-size: 0.825rem;
-      color: var(--text-muted);
-    }
-
-    .play-btn {
-      width: 42px;
-      height: 42px;
+    .work-play-btn {
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
-      background: #181b20;
-      border: 1px solid #2a3038;
-      color: #fff;
+      border: none;
       display: flex;
       align-items: center;
       justify-content: center;
+      color: #fff;
+      cursor: pointer;
       flex-shrink: 0;
-      transition: all 0.2s ease;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .track-card:hover .play-btn {
-      background: var(--accent);
-      border-color: var(--accent);
+    .work-play-btn.violet {
+      background: var(--accent-violet);
+      box-shadow: 0 0 12px var(--accent-violet-glow);
     }
 
-    /* Skills / About Grid */
-    .skills-grid {
+    .work-play-btn.amber {
+      background: var(--accent-amber);
+      color: #0b0914;
+      box-shadow: 0 0 12px var(--accent-amber-glow);
+    }
+
+    .work-card:hover .work-play-btn {
+      transform: scale(1.08);
+    }
+
+    /* Discography Grid */
+    .disco-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 1.25rem;
-      margin-top: 1.5rem;
     }
 
-    .skill-card {
+    .disco-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 1.5rem;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
     }
 
-    .skill-card h3 {
-      font-size: 0.95rem;
+    .disco-card:hover {
+      border-color: var(--accent-violet);
+      transform: translateY(-3px);
+    }
+
+    .disco-cover {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+    }
+
+    .disco-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.75);
+      transition: transform 0.35s, filter 0.35s;
+    }
+
+    .disco-card:hover .disco-cover img {
+      transform: scale(1.04);
+      filter: brightness(0.9);
+    }
+
+    .disco-overlay-title {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+      text-align: center;
+      padding: 0.5rem;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    }
+
+    .disco-meta {
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .disco-links {
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .disco-links a {
+      color: var(--text-muted);
+      text-decoration: none;
       font-weight: 600;
-      margin-bottom: 0.75rem;
-      color: var(--text-main);
+      transition: color 0.2s;
     }
 
-    .skill-tags {
+    .disco-links a:hover {
+      color: var(--accent-amber);
+    }
+
+    /* About & Profile Section */
+    .about-box {
+      background: linear-gradient(145deg, rgba(21, 17, 37, 0.9), rgba(15, 12, 28, 0.9));
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 2.25rem;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 2.5rem;
+    }
+
+    .about-text h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.85rem;
+      color: var(--accent-amber-soft);
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .specs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .spec-group h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-violet);
+      margin-bottom: 0.4rem;
+    }
+
+    .spec-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 0.4rem;
     }
 
-    .skill-tag {
-      background: #1a1e24;
-      color: var(--text-muted);
+    .spec-tag {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
       font-size: 0.75rem;
-      padding: 0.25rem 0.55rem;
-      border-radius: 4px;
-      border: 1px solid #262c35;
+      padding: 0.25rem 0.6rem;
+      border-radius: 5px;
     }
 
-    /* Persistent Player Bar */
+    /* Persistent Bottom Audio Player */
     .player-bar {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      background: rgba(14, 16, 20, 0.96);
-      backdrop-filter: blur(16px);
-      border-top: 1px solid var(--card-border);
-      padding: 1rem 1.5rem;
+      background: rgba(13, 10, 24, 0.95);
+      backdrop-filter: blur(18px);
+      border-top: 2px solid transparent;
+      border-image: linear-gradient(90deg, var(--accent-amber), var(--accent-violet)) 1;
+      padding: 0.85rem 2rem;
+      z-index: 100;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .player-inner {
+      max-width: 1140px;
+      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1.5rem;
-      z-index: 100;
     }
 
-    .player-track-info {
-      width: 25%;
-      min-width: 160px;
+    .player-left {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      min-width: 240px;
     }
 
-    .player-track-title {
-      font-size: 0.9rem;
+    .transport-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .ctrl-icon-btn {
+      background: none;
+      border: none;
+      color: var(--accent-amber-soft);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      opacity: 0.8;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .ctrl-icon-btn:hover {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+
+    .play-main-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--accent-amber);
+      color: #0b0914;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 15px var(--accent-amber-glow);
+      transition: transform 0.15s;
+    }
+
+    .play-main-btn:hover {
+      transform: scale(1.07);
+    }
+
+    .now-playing-info {
+      overflow: hidden;
+    }
+
+    .np-title {
+      font-size: 0.88rem;
       font-weight: 600;
+      color: var(--text-main);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       display: block;
     }
 
-    .player-track-category {
-      font-size: 0.75rem;
+    .np-sub {
+      font-size: 0.74rem;
       color: var(--text-muted);
     }
 
-    .player-controls {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .player-center {
       flex: 1;
-      max-width: 520px;
-      gap: 0.4rem;
-    }
-
-    .ctrl-btn.play-pause {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: #fff;
-      color: #000;
-      border: none;
-      cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: center;
-      transition: transform 0.15s, background 0.2s;
+      gap: 0.85rem;
+      max-width: 560px;
     }
 
-    .ctrl-btn.play-pause:hover {
-      background: var(--accent);
-      color: #fff;
-      transform: scale(1.05);
-    }
-
-    .waveform-container {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
+    .time-label {
       font-size: 0.75rem;
       color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+      min-width: 36px;
     }
 
-    .wave-wrapper {
+    .wave-box {
       flex: 1;
-      height: 28px;
+      height: 34px;
       position: relative;
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 4px;
       cursor: pointer;
-      overflow: hidden;
       display: flex;
       align-items: center;
     }
 
-    canvas#waveform-canvas {
+    canvas#waveform {
       width: 100%;
       height: 100%;
       display: block;
     }
 
-    .wave-progress-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 0%;
-      background: rgba(59, 130, 246, 0.2);
-      border-right: 2px solid var(--accent);
-      pointer-events: none;
-    }
-
-    .volume-container {
-      width: 20%;
+    .player-right {
       display: flex;
-      justify-content: flex-end;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
 
-    input[type=range] { accent-color: var(--accent); cursor: pointer; }
+    input[type="range"].vol-slider {
+      accent-color: var(--accent-amber);
+      width: 80px;
+      cursor: pointer;
+    }
+
+    /* Responsive Mobile & Tablet Adjustments */
+    @media (max-width: 860px) {
+      .about-box {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+        padding: 1.5rem;
+      }
+      .nav-right {
+        gap: 1rem;
+      }
+      .platform-icons {
+        display: none;
+      }
+      .player-inner {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+      .player-left {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .player-center {
+        width: 100%;
+        max-width: 100%;
+      }
+      .player-right {
+        display: none;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .nav-links {
+        gap: 1rem;
+      }
+      .hero {
+        padding: 3.5rem 0 2.5rem;
+      }
+      .player-bar {
+        padding: 0.75rem 1rem;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <header>
-      <span class="badge">Portfolio & Production Sonore</span>
-      <h1>Composition & Sound Design</h1>
-      <p class="lead">
-        Spécialisé dans la musique à l'image, le sound design interactif pour le jeu vidéo et la production audio. Étudiant en Licence 3 de Musicologie à Sorbonne Université.
-      </p>
-      <div class="social-links">
-        <a href="https://github.com/lionn3" target="_blank">GitHub</a>
-        <a href="mailto:arhanboraegemen@gmail.com">Contact</a>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="brand">ARHAN BORA EGEMEN</a>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="#works" class="active" data-i18n="navWorks">Works</a></li>
+          <li><a href="#discography" data-i18n="navDisco">Discography</a></li>
+          <li><a href="#about" data-i18n="navAbout">About</a></li>
+        </ul>
+
+        <div class="lang-switch">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <span>|</span>
+          <button class="lang-btn" data-lang="fr">FR</button>
+        </div>
+
+        <div class="platform-icons">
+          <!-- Spotify -->
+          <a href="https://open.spotify.com" target="_blank" title="Spotify" aria-label="Spotify">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          </a>
+          <!-- Apple Music -->
+          <a href="https://music.apple.com" target="_blank" title="Apple Music" aria-label="Apple Music">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.988c-.152.01-.303.017-.455.026-.747.043-1.49.123-2.193.4-1.336.53-2.3 1.452-2.865 2.78-.192.448-.292.925-.363 1.408-.056.392-.088.785-.1 1.18 0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424.05.815.154 1.624.497 2.373.65 1.42 1.738 2.353 3.234 2.802.42.127.856.187 1.293.228.555.053 1.11.06 1.667.06h11.03c.525 0 1.048-.034 1.57-.1.823-.106 1.597-.35 2.296-.81a5.046 5.046 0 001.88-2.207c.186-.42.293-.87.37-1.324.113-.675.138-1.358.137-2.04-.002-3.8 0-7.595-.003-11.393zm-6.423 3.99v5.712c0 .417-.058.827-.244 1.206-.29.59-.76.962-1.388 1.14-.35.1-.706.157-1.07.173-.95.042-1.8-.335-2.22-1.092-.413-.746-.27-1.698.36-2.315.39-.382.87-.61 1.4-.73.45-.103.908-.173 1.362-.262.27-.053.455-.2.49-.483.01-.077.012-.155.012-.233V8.995c0-.29-.12-.417-.406-.36-.605.12-1.21.244-1.815.367-.92.187-1.84.374-2.76.562-.295.06-.428.22-.428.523v7.01c0 .453-.068.894-.282 1.3-.313.595-.817.96-1.464 1.124-.45.114-.91.158-1.372.122-.97-.076-1.785-.687-1.994-1.64-.195-.892.206-1.835 1.01-2.313.43-.255.908-.387 1.4-.476.41-.074.823-.137 1.23-.222.256-.053.41-.205.435-.47.007-.07.01-.14.01-.21V7.29c0-.465.197-.74.648-.84.66-.145 1.323-.28 1.986-.418 1.27-.265 2.54-.53 3.81-.795.18-.038.365-.062.55-.06.405.005.662.248.672.654.006.288.002.576.002.864v3.42z"/></svg>
+          </a>
+          <!-- YouTube -->
+          <a href="https://youtube.com" target="_blank" title="YouTube" aria-label="YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <!-- GitHub -->
+          <a href="https://github.com/lionn3" target="_blank" title="GitHub" aria-label="GitHub">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          </a>
+        </div>
       </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Hero -->
+    <header class="hero">
+      <h1 data-i18n="heroTitle">Composition & Sound Design for Interactive Media and Stage.</h1>
+      <p data-i18n="heroSub">Crafting immersive audio experiences for games, theater, and interactive media.</p>
     </header>
 
-    <main>
-      <!-- Parça Listesi & Filtre -->
-      <section>
-        <div class="section-header">
-          <h2 class="section-title">Sélection Audio</h2>
-          <div class="filter-group">
-            {categories.map((c, i) => (
-              <button class={`filter-btn ${i === 0 ? 'active' : ''}`} data-filter={c}>{c}</button>
-            ))}
+    <!-- Selected Works -->
+    <section id="works" class="section">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="secWorks">Selected Works</h2>
+        <div class="filter-pills">
+          <button class="pill active" data-filter="all" data-i18n="filterAll">All</button>
+          <button class="pill" data-filter="catGame" data-i18n="filterGame">Game Audio</button>
+          <button class="pill" data-filter="catTheater" data-i18n="filterTheater">Theater Score</button>
+          <button class="pill" data-filter="catConcept" data-i18n="filterConcept">Speculative / Loops</button>
+        </div>
+      </div>
+
+      <div class="works-grid">
+        {projects.map((p) => (
+          <article 
+            class="work-card" 
+            data-cat={p.categoryKey}
+            data-src={p.src}
+            data-title={p.title}
+            data-badge={p.badge}
+            data-desc-en={p.desc.en}
+            data-desc-fr={p.desc.fr}
+          >
+            <div class="work-thumb">
+              <img src={p.image} alt={p.title} loading="lazy" />
+              <span class="work-badge">{p.badge}</span>
+            </div>
+            <div class="work-body">
+              <p class="work-desc">{p.desc.en}</p>
+              <div class="work-footer">
+                <span class="work-title">{p.title}</span>
+                <button class={`work-play-btn ${p.accent}`} aria-label="Play track">
+                  <svg class="icon-card-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Selected Discography -->
+    <section id="discography" class="section">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="secDisco">Selected Discography</h2>
+      </div>
+
+      <div class="disco-grid">
+        {discography.map((d) => (
+          <div class="disco-card">
+            <div class="disco-cover">
+              <img src={d.cover} alt={d.title} loading="lazy" />
+              <div class="disco-overlay-title">{d.title}</div>
+            </div>
+            <div class="disco-meta">
+              <span>{d.year} • {d.genre}</span>
+              <div class="disco-links">
+                <a href={d.spotify} target="_blank">SP</a>
+                <a href={d.apple} target="_blank">AM</a>
+                <a href={d.youtube} target="_blank">YT</a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- About & Methodology -->
+    <section id="about" class="section">
+      <div class="about-box">
+        <div class="about-text">
+          <h3 data-i18n="aboutHeading">Profile & Musical Architecture</h3>
+          <p data-i18n="aboutP1">
+            Composer and sound designer focusing on narrative-driven game scores, theatrical productions, and electroacoustic composition. Combining formal musicological analysis (Sorbonne Université) with modern synthesis and modular audio workflows.
+          </p>
+          <p data-i18n="aboutP2">
+            Available for original soundtrack scoring, interactive audio implementation, and stage sound design collaborations in Paris and internationally.
+          </p>
+          <p style="margin-top:1.2rem;">
+            <a href="mailto:arhanboraegemen@gmail.com" style="color: var(--accent-amber); text-decoration: none; font-weight: 600;">
+              arhanboraegemen@gmail.com →
+            </a>
+          </p>
+        </div>
+
+        <div class="specs-list">
+          <div class="spec-group">
+            <h4 data-i18n="spec1">Production & Synthesis</h4>
+            <div class="spec-tags">
+              <span class="spec-tag">Ableton Live 12 Suite</span>
+              <span class="spec-tag">FL Studio</span>
+              <span class="spec-tag">ReaPlugs DSP</span>
+              <span class="spec-tag">Sound Design & Foley</span>
+            </div>
+          </div>
+          <div class="spec-group">
+            <h4 data-i18n="spec2">Domains & Theory</h4>
+            <div class="spec-tags">
+              <span class="spec-tag">Interactive Game Loops</span>
+              <span class="spec-tag">Theatrical Cues</span>
+              <span class="spec-tag">Formal Musicology</span>
+              <span class="spec-tag">Acoustic Arrangement</span>
+            </div>
           </div>
         </div>
-
-        <div class="track-list" id="track-list">
-          {tracks.map((t) => (
-            <div class="track-card" data-category={t.category} data-src={t.src} data-title={t.title} data-cat={t.category}>
-              <div class="track-info">
-                <div class="track-tag">{t.category}</div>
-                <div class="track-name">{t.title}</div>
-                <div class="track-meta">{t.role} • {t.desc}</div>
-              </div>
-              <div class="play-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                </svg>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <!-- Yetkinlikler / Profil -->
-      <section>
-        <h2 class="section-title">Compétences & Environnement Technique</h2>
-        <div class="skills-grid">
-          {skills.map(s => (
-            <div class="skill-card">
-              <h3>{s.name}</h3>
-              <div class="skill-tags">
-                {s.items.map(item => (
-                  <span class="skill-tag">{item}</span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-    </main>
+      </div>
+    </section>
   </div>
 
-  <!-- Player Bar -->
+  <!-- Persistent Audio Player Bar -->
   <div class="player-bar">
-    <div class="player-track-info">
-      <span id="player-title" class="player-track-title">Sélectionnez une piste</span>
-      <span id="player-cat" class="player-track-category">Prêt</span>
-    </div>
-
-    <div class="player-controls">
-      <button id="btn-play" class="ctrl-btn play-pause">
-        <svg id="icon-play" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-          <polygon points="5 3 19 12 5 21 5 3"></polygon>
-        </svg>
-        <svg id="icon-pause" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
-          <rect x="6" y="4" width="4" height="16"></rect>
-          <rect x="14" y="4" width="4" height="16"></rect>
-        </svg>
-      </button>
-
-      <div class="waveform-container">
-        <span id="current-time">0:00</span>
-        <div id="wave-wrapper" class="wave-wrapper">
-          <canvas id="waveform-canvas"></canvas>
-          <div id="wave-progress" class="wave-progress-overlay"></div>
+    <div class="player-inner">
+      <div class="player-left">
+        <div class="transport-controls">
+          <button id="btn-prev" class="ctrl-icon-btn" aria-label="Previous">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+          </button>
+          <button id="btn-play" class="play-main-btn" aria-label="Play or Pause">
+            <svg id="svg-play" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            <svg id="svg-pause" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+          </button>
+          <button id="btn-next" class="ctrl-icon-btn" aria-label="Next">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+          </button>
         </div>
-        <span id="total-time">0:00</span>
+
+        <div class="now-playing-info">
+          <span id="np-title" class="np-title">Arhan Bora Egemen — Select a Work</span>
+          <span id="np-sub" class="np-sub">Ready to play</span>
+        </div>
+      </div>
+
+      <div class="player-center">
+        <span id="time-curr" class="time-label">0:00</span>
+        <div id="wave-box" class="wave-box">
+          <canvas id="waveform"></canvas>
+        </div>
+        <span id="time-total" class="time-label">0:00</span>
+      </div>
+
+      <div class="player-right">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--accent-amber-soft)"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+        <input type="range" id="vol-slider" class="vol-slider" min="0" max="1" step="0.05" value="0.85" />
       </div>
     </div>
-
-    <div class="volume-container">
-      <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.8" style="width: 80px;" />
-    </div>
   </div>
 
-  <audio id="audio-engine" preload="metadata"></audio>
+  <audio id="audio-el" preload="metadata"></audio>
 
   <script>
-    const audio = document.getElementById('audio-engine');
-    const playBtn = document.getElementById('btn-play');
-    const iconPlay = document.getElementById('icon-play');
-    const iconPause = document.getElementById('icon-pause');
-    const playerTitle = document.getElementById('player-title');
-    const playerCat = document.getElementById('player-cat');
-    const waveProgress = document.getElementById('wave-progress');
-    const waveWrapper = document.getElementById('wave-wrapper');
-    const canvas = document.getElementById('waveform-canvas');
-    const ctx = canvas.getContext('2d');
-    const currentTimeEl = document.getElementById('current-time');
-    const totalTimeEl = document.getElementById('total-time');
-    const volumeSlider = document.getElementById('volume-slider');
-    const trackCards = document.querySelectorAll('.track-card');
-    const filterBtns = document.querySelectorAll('.filter-btn');
+    // 1. Dictionary for Instant EN / FR Language Switching
+    const dict = {
+      en: {
+        navWorks: "Works",
+        navDisco: "Discography",
+        navAbout: "About",
+        heroTitle: "Composition & Sound Design for Interactive Media and Stage.",
+        heroSub: "Crafting immersive audio experiences for games, theater, and interactive media.",
+        secWorks: "Selected Works",
+        filterAll: "All",
+        filterGame: "Game Audio",
+        filterTheater: "Theater Score",
+        filterConcept: "Speculative / Loops",
+        secDisco: "Selected Discography",
+        aboutHeading: "Profile & Musical Architecture",
+        aboutP1: "Composer and sound designer focusing on narrative-driven game scores, theatrical productions, and electroacoustic composition. Combining formal musicological analysis (Sorbonne Université) with modern synthesis and modular audio workflows.",
+        aboutP2: "Available for original soundtrack scoring, interactive audio implementation, and stage sound design collaborations in Paris and internationally.",
+        spec1: "Production & Synthesis",
+        spec2: "Domains & Theory"
+      },
+      fr: {
+        navWorks: "Projets",
+        navDisco: "Discographie",
+        navAbout: "À Propos",
+        heroTitle: "Composition & Sound Design pour Médias Interactifs et Scène.",
+        heroSub: "Création d'expériences sonores immersives pour le jeu vidéo, le théâtre et les médias linéaires.",
+        secWorks: "Projets Sélectionnés",
+        filterAll: "Tous",
+        filterGame: "Jeu Vidéo",
+        filterTheater: "Théâtre & Scène",
+        filterConcept: "Spéculatif / Boucles",
+        secDisco: "Discographie Sélectionnée",
+        aboutHeading: "Profil & Architecture Musicale",
+        aboutP1: "Compositeur et sound designer spécialisé dans les bandes originales de jeux vidéo, la musique de scène et la composition électroacoustique. Alliance entre analyse musicologique formelle (Sorbonne Université) et synthèse sonore moderne.",
+        aboutP2: "Disponible pour la composition de bandes originales, l'intégration audio interactive et le sound design théâtral à Paris et à l'international.",
+        spec1: "Production & Synthèse",
+        spec2: "Domaines & Théorie"
+      }
+    };
 
-    let audioCtx, analyser, dataArray;
-    let isInitialized = false;
+    const langBtns = document.querySelectorAll('.lang-btn');
+    const i18nEls = document.querySelectorAll('[data-i18n]');
+    const workCards = Array.from(document.querySelectorAll('.work-card'));
 
-    // Filter Logic
-    filterBtns.forEach(btn => {
+    langBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
+        const lang = btn.getAttribute('data-lang');
+        langBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        const filter = btn.getAttribute('data-filter');
 
-        trackCards.forEach(card => {
-          if (filter === "Tous" || card.getAttribute('data-category') === filter) {
-            card.style.display = "flex";
+        i18nEls.forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (dict[lang][key]) el.textContent = dict[lang][key];
+        });
+
+        workCards.forEach(card => {
+          const descEl = card.querySelector('.work-desc');
+          descEl.textContent = card.getAttribute(`data-desc-${lang}`);
+        });
+      });
+    });
+
+    // 2. Category Filtering
+    const pills = document.querySelectorAll('.pill');
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        const filter = pill.getAttribute('data-filter');
+
+        workCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-cat') === filter) {
+            card.style.display = 'flex';
           } else {
-            card.style.display = "none";
+            card.style.display = 'none';
           }
         });
       });
     });
 
-    // Audio Visualizer
-    function initAudioContext() {
-      if (isInitialized) return;
+    // 3. Audio Player & Amber-Violet Dual-Tone Waveform
+    const audio = document.getElementById('audio-el');
+    const btnPlay = document.getElementById('btn-play');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const svgPlay = document.getElementById('svg-play');
+    const svgPause = document.getElementById('svg-pause');
+    const npTitle = document.getElementById('np-title');
+    const npSub = document.getElementById('np-sub');
+    const timeCurr = document.getElementById('time-curr');
+    const timeTotal = document.getElementById('time-total');
+    const volSlider = document.getElementById('vol-slider');
+    const waveBox = document.getElementById('wave-box');
+    const canvas = document.getElementById('waveform');
+    const ctx = canvas.getContext('2d');
+
+    let currentIndex = -1;
+    let audioCtx, analyser, dataArray;
+    let isAudioSetup = false;
+
+    function setupAudioGraph() {
+      if (isAudioSetup) return;
       try {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         analyser = audioCtx.createAnalyser();
-        analyser.fftSize = 64;
-        const source = audioCtx.createMediaElementSource(audio);
-        source.connect(analyser);
+        analyser.fftSize = 128;
+        const srcNode = audioCtx.createMediaElementSource(audio);
+        srcNode.connect(analyser);
         analyser.connect(audioCtx.destination);
         dataArray = new Uint8Array(analyser.frequencyBinCount);
-        isInitialized = true;
-        draw();
-      } catch (e) {
-        // Fallback for strict browser policies
-      }
+        isAudioSetup = true;
+      } catch (e) {}
     }
 
     function resizeCanvas() {
-      canvas.width = waveWrapper.clientWidth * window.devicePixelRatio;
-      canvas.height = waveWrapper.clientHeight * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = waveBox.clientWidth * dpr;
+      canvas.height = waveBox.clientHeight * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    function draw() {
-      requestAnimationFrame(draw);
-      const w = waveWrapper.clientWidth;
-      const h = waveWrapper.clientHeight;
+    function renderWaveform() {
+      requestAnimationFrame(renderWaveform);
+      const w = waveBox.clientWidth;
+      const h = waveBox.clientHeight;
       ctx.clearRect(0, 0, w, h);
 
-      const barCount = 36;
-      const barWidth = (w / barCount) - 2;
+      const bars = 48;
+      const gap = 3;
+      const barWidth = (w - (bars - 1) * gap) / bars;
+      const progressRatio = audio.duration ? (audio.currentTime / audio.duration) : 0;
 
-      if (isInitialized && !audio.paused) {
+      if (isAudioSetup && !audio.paused) {
         analyser.getByteFrequencyData(dataArray);
       }
 
-      for (let i = 0; i < barCount; i++) {
-        let val = 0.1;
-        if (isInitialized && !audio.paused) {
-          val = Math.max(0.1, dataArray[i % dataArray.length] / 255);
-        }
-        const barHeight = Math.max(4, val * (h - 6));
-        const x = i * (barWidth + 2);
-        const y = (h - barHeight) / 2;
+      const gradActive = ctx.createLinearGradient(0, 0, w, 0);
+      gradActive.addColorStop(0, '#f59e0b');
+      gradActive.addColorStop(0.55, '#c084fc');
+      gradActive.addColorStop(1, '#8b5cf6');
 
-        ctx.fillStyle = audio.paused ? '#2a3038' : '#3b82f6';
-        ctx.fillRect(x, y, barWidth, barHeight);
+      for (let i = 0; i < bars; i++) {
+        let amp = 0.18 + Math.sin(i * 0.45) * 0.1;
+        if (isAudioSetup && !audio.paused) {
+          amp = Math.max(0.12, dataArray[i % dataArray.length] / 255);
+        }
+        const barH = Math.max(4, amp * (h - 4));
+        const x = i * (barWidth + gap);
+        const y = (h - barH) / 2;
+
+        const barRatio = i / bars;
+        ctx.fillStyle = (barRatio <= progressRatio && !audio.paused) ? gradActive : 'rgba(156, 160, 176, 0.25)';
+        ctx.beginPath();
+        ctx.roundRect(x, y, barWidth, barH, 2);
+        ctx.fill();
       }
     }
+    renderWaveform();
 
-    function formatTime(sec) {
-      if (isNaN(sec)) return "0:00";
-      const m = Math.floor(sec / 60);
-      const s = Math.floor(sec % 60);
-      return `${m}:${s < 10 ? '0' : ''}${s}`;
+    function formatSec(s) {
+      if (!s || isNaN(s)) return "0:00";
+      const m = Math.floor(s / 60);
+      const sec = Math.floor(s % 60);
+      return `${m}:${sec < 10 ? '0' : ''}${sec}`;
     }
 
-    function togglePlay() {
-      if (!audio.src) return;
-      initAudioContext();
+    function loadTrack(index) {
+      if (index < 0 || index >= workCards.length) return;
+      setupAudioGraph();
       if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
 
-      if (audio.paused) {
-        audio.play();
-        iconPlay.style.display = 'none';
-        iconPause.style.display = 'block';
-      } else {
-        audio.pause();
-        iconPlay.style.display = 'block';
-        iconPause.style.display = 'none';
-      }
+      currentIndex = index;
+      const card = workCards[index];
+      const src = card.getAttribute('data-src');
+      const title = card.getAttribute('data-title');
+      const badge = card.getAttribute('data-badge');
+
+      workCards.forEach(c => c.classList.remove('playing'));
+      card.classList.add('playing');
+
+      npTitle.textContent = `Arhan Bora Egemen — ${title}`;
+      npSub.textContent = badge;
+
+      audio.src = src;
+      audio.play().then(() => {
+        svgPlay.style.display = 'none';
+        svgPause.style.display = 'block';
+      }).catch(() => {
+        // Handles missing local demo file gracefully
+        svgPlay.style.display = 'block';
+        svgPause.style.display = 'none';
+      });
     }
 
-    playBtn.addEventListener('click', togglePlay);
-
-    trackCards.forEach(card => {
+    workCards.forEach((card, idx) => {
       card.addEventListener('click', () => {
-        initAudioContext();
-        if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-
-        const src = card.getAttribute('data-src');
-        const title = card.getAttribute('data-title');
-        const cat = card.getAttribute('data-cat');
-
-        trackCards.forEach(c => c.classList.remove('active'));
-        card.classList.add('active');
-
-        playerTitle.textContent = title;
-        playerCat.textContent = cat;
-
-        audio.src = src;
-        audio.play();
-        iconPlay.style.display = 'none';
-        iconPause.style.display = 'block';
+        if (currentIndex === idx && !audio.paused) {
+          audio.pause();
+          svgPlay.style.display = 'block';
+          svgPause.style.display = 'none';
+        } else if (currentIndex === idx && audio.paused && audio.src) {
+          audio.play();
+          svgPlay.style.display = 'none';
+          svgPause.style.display = 'block';
+        } else {
+          loadTrack(idx);
+        }
       });
     });
 
-    audio.addEventListener('timeupdate', () => {
-      if (audio.duration) {
-        const pct = (audio.currentTime / audio.duration) * 100;
-        waveProgress.style.width = `${pct}%`;
-        currentTimeEl.textContent = formatTime(audio.currentTime);
-        totalTimeEl.textContent = formatTime(audio.duration);
+    btnPlay.addEventListener('click', () => {
+      if (currentIndex === -1) {
+        loadTrack(0);
+        return;
+      }
+      if (audio.paused) {
+        audio.play();
+        svgPlay.style.display = 'none';
+        svgPause.style.display = 'block';
+      } else {
+        audio.pause();
+        svgPlay.style.display = 'block';
+        svgPause.style.display = 'none';
       }
     });
 
-    waveWrapper.addEventListener('click', (e) => {
-      if (!audio.duration) return;
-      const rect = waveWrapper.getBoundingClientRect();
-      const clickPos = (e.clientX - rect.left) / rect.width;
-      audio.currentTime = clickPos * audio.duration;
+    btnPrev.addEventListener('click', () => {
+      if (currentIndex > 0) loadTrack(currentIndex - 1);
     });
 
-    volumeSlider.addEventListener('input', (e) => {
+    btnNext.addEventListener('click', () => {
+      if (currentIndex < workCards.length - 1) loadTrack(currentIndex + 1);
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      timeCurr.textContent = formatSec(audio.currentTime);
+      timeTotal.textContent = formatSec(audio.duration);
+    });
+
+    waveBox.addEventListener('click', (e) => {
+      if (!audio.duration) return;
+      const rect = waveBox.getBoundingClientRect();
+      const ratio = (e.clientX - rect.left) / rect.width;
+      audio.currentTime = ratio * audio.duration;
+    });
+
+    volSlider.addEventListener('input', (e) => {
       audio.volume = e.target.value;
     });
-
-    draw();
   </script>
 </body>
 </html>
