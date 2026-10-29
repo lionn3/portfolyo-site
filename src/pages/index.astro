@@ -3,30 +3,38 @@ const tracks = [
   {
     id: 1,
     title: "Rocket Rat - Main Theme & Boss Battle",
-    category: "Game Audio / OST",
+    category: "Game Audio",
     role: "Kompozisyon, Sentez & Miks (Ableton Live)",
     duration: "02:14",
-    src: "/Gameplay_Release_Export_Loop.wav",
-    desc: "Retro-modern synthwave ve dinamik perküsyonlarla tasarlanmış boss savaşı müziği."
+    src: "/audio/demo-1.mp3",
+    desc: "Retro-modern synth dokuları, dinamik perküsyonlar ve boss savaşı enerji eğrisi."
   },
   {
     id: 2,
     title: "Vocal Exploration & Acoustic Study",
-    category: "Acoustique / Recherche",
+    category: "Acoustique",
     role: "Kompozisyon & Akustik Düzenleme",
     duration: "01:45",
-    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-    desc: "Çağdaş vokal tınıları ve klasik form analizi üzerine deneysel çalışma."
+    src: "/audio/demo-2.mp3",
+    desc: "Çağdaş vokal teknikleri ve klasik form analizi üzerine kompozisyon."
   },
   {
     id: 3,
     title: "Modular Atmosphere & Ambient Loop",
-    category: "Sound Design / Ambient",
-    role: "SFX & Modüler Ses Tasarımı",
+    category: "Sound Design",
+    role: "SFX & Modüler Doku Tasarımı",
     duration: "03:10",
-    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-    desc: "İzometrik keşif oyunları için kesintisiz döngüye uygun atmosferik katmanlar."
+    src: "/audio/demo-3.mp3",
+    desc: "İzometrik keşif oyunları için kesintisiz döngüye (loop) uygun atmosferik ses tasarımı."
   }
+];
+
+const categories = ["Tous", "Game Audio", "Sound Design", "Acoustique"];
+
+const skills = [
+  { name: "DAW & Audio", items: ["Ableton Live 12", "FL Studio", "ReaPlugs", "Audio Routing"] },
+  { name: "Spécialités", items: ["Game Audio & Loop Design", "Synthèse Sonore", "Mixage Stéréo", "Analyse Formelle"] },
+  { name: "Environnement", items: ["Windows 11", "Git / GitHub", "Web Audio API", "Interactive Media"] }
 ];
 ---
 
@@ -35,23 +43,25 @@ const tracks = [
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arhan Bora Egemen - Portfolio Audio</title>
+  <title>Arhan Bora Egemen - Portfolio Audio & Composition</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0a0b0d;
+      --bg: #090a0c;
       --card-bg: #121417;
       --card-border: #1e2227;
       --card-hover: #171a1f;
       --accent: #3b82f6;
-      --accent-glow: rgba(59, 130, 246, 0.25);
+      --accent-glow: rgba(59, 130, 246, 0.2);
       --text-main: #f3f4f6;
       --text-muted: #9ca3af;
+      --tag-bg: rgba(59, 130, 246, 0.1);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       background-color: var(--bg);
       color: var(--text-main);
@@ -60,9 +70,17 @@ const tracks = [
       padding-bottom: 140px;
     }
 
-    .container { max-width: 900px; margin: 0 auto; padding: 4rem 1.5rem; }
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
 
-    header { margin-bottom: 3.5rem; }
+    /* Header */
+    header {
+      margin-bottom: 3.5rem;
+    }
+
     .badge {
       display: inline-block;
       font-size: 0.75rem;
@@ -70,30 +88,102 @@ const tracks = [
       letter-spacing: 0.05em;
       text-transform: uppercase;
       padding: 0.25rem 0.75rem;
-      background: rgba(59, 130, 246, 0.1);
+      background: var(--tag-bg);
       color: var(--accent);
       border-radius: 9999px;
       margin-bottom: 1rem;
       border: 1px solid rgba(59, 130, 246, 0.25);
     }
-    h1 { font-size: 2.25rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
-    p.lead { color: var(--text-muted); font-size: 1.05rem; max-width: 650px; }
 
-    h2.section-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      margin-bottom: 1.5rem;
-      border-bottom: 1px solid var(--card-border);
-      padding-bottom: 0.75rem;
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
     }
 
-    .track-list { display: flex; flex-direction: column; gap: 1rem; }
+    p.lead {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 680px;
+    }
+
+    .social-links {
+      margin-top: 1.25rem;
+      display: flex;
+      gap: 1.25rem;
+    }
+
+    .social-links a {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--text-main);
+    }
+
+    /* Section Headings */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    h2.section-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    /* Filter Buttons */
+    .filter-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover {
+      border-color: #374151;
+      color: var(--text-main);
+    }
+
+    .filter-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* Tracks */
+    .track-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-bottom: 4rem;
+    }
+
     .track-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 10px;
-      padding: 1.25rem 1.5rem;
+      padding: 1.15rem 1.4rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -101,24 +191,43 @@ const tracks = [
       cursor: pointer;
       transition: all 0.2s ease;
     }
+
     .track-card:hover {
       background: var(--card-hover);
       border-color: #2e353f;
       transform: translateY(-1px);
     }
+
     .track-card.active {
       border-color: var(--accent);
       box-shadow: 0 0 20px var(--accent-glow);
     }
 
     .track-info { flex: 1; }
-    .track-tag { font-size: 0.7rem; color: var(--accent); font-weight: 600; text-transform: uppercase; margin-bottom: 0.25rem; }
-    .track-name { font-size: 1.05rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.25rem; }
-    .track-meta { font-size: 0.825rem; color: var(--text-muted); }
+    .track-tag {
+      font-size: 0.7rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.2rem;
+    }
+
+    .track-name {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 0.2rem;
+    }
+
+    .track-meta {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+    }
 
     .play-btn {
-      width: 44px;
-      height: 44px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       background: #181b20;
       border: 1px solid #2a3038;
@@ -129,18 +238,56 @@ const tracks = [
       flex-shrink: 0;
       transition: all 0.2s ease;
     }
+
     .track-card:hover .play-btn {
       background: var(--accent);
       border-color: var(--accent);
     }
 
-    /* Alt Müzik Çalar & Waveform Alanı */
+    /* Skills / About Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .skill-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+
+    .skill-card h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .skill-tag {
+      background: #1a1e24;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      padding: 0.25rem 0.55rem;
+      border-radius: 4px;
+      border: 1px solid #262c35;
+    }
+
+    /* Persistent Player Bar */
     .player-bar {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      background: rgba(14, 16, 20, 0.95);
+      background: rgba(14, 16, 20, 0.96);
       backdrop-filter: blur(16px);
       border-top: 1px solid var(--card-border);
       padding: 1rem 1.5rem;
@@ -151,9 +298,24 @@ const tracks = [
       z-index: 100;
     }
 
-    .player-track-info { width: 25%; min-width: 180px; }
-    .player-track-title { font-size: 0.9rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
-    .player-track-category { font-size: 0.75rem; color: var(--text-muted); }
+    .player-track-info {
+      width: 25%;
+      min-width: 160px;
+    }
+
+    .player-track-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+    }
+
+    .player-track-category {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
 
     .player-controls {
       display: flex;
@@ -161,7 +323,7 @@ const tracks = [
       align-items: center;
       flex: 1;
       max-width: 520px;
-      gap: 0.5rem;
+      gap: 0.4rem;
     }
 
     .ctrl-btn.play-pause {
@@ -177,7 +339,12 @@ const tracks = [
       justify-content: center;
       transition: transform 0.15s, background 0.2s;
     }
-    .ctrl-btn.play-pause:hover { background: var(--accent); color: #fff; transform: scale(1.05); }
+
+    .ctrl-btn.play-pause:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: scale(1.05);
+    }
 
     .waveform-container {
       width: 100%;
@@ -224,6 +391,7 @@ const tracks = [
       align-items: center;
       gap: 0.5rem;
     }
+
     input[type=range] { accent-color: var(--accent); cursor: pointer; }
   </style>
 </head>
@@ -234,32 +402,64 @@ const tracks = [
       <span class="badge">Portfolio & Production Sonore</span>
       <h1>Composition & Sound Design</h1>
       <p class="lead">
-        Spécialisé dans la musique à l'image, le sound design interactif et la production musicale sous Ableton Live. Étudiant en Licence 3 de Musicologie à Sorbonne Université.
+        Spécialisé dans la musique à l'image, le sound design interactif pour le jeu vidéo et la production audio. Étudiant en Licence 3 de Musicologie à Sorbonne Université.
       </p>
+      <div class="social-links">
+        <a href="https://github.com/lionn3" target="_blank">GitHub</a>
+        <a href="mailto:arhanboraegemen@gmail.com">Contact</a>
+      </div>
     </header>
 
     <main>
-      <h2 class="section-title">Sélection Audio & Références</h2>
-      <div class="track-list">
-        {tracks.map((t) => (
-          <div class="track-card" data-src={t.src} data-title={t.title} data-cat={t.category}>
-            <div class="track-info">
-              <div class="track-tag">{t.category}</div>
-              <div class="track-name">{t.title}</div>
-              <div class="track-meta">{t.role} • {t.desc}</div>
-            </div>
-            <div class="play-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="5 3 19 12 5 21 5 3"></polygon>
-              </svg>
-            </div>
+      <!-- Parça Listesi & Filtre -->
+      <section>
+        <div class="section-header">
+          <h2 class="section-title">Sélection Audio</h2>
+          <div class="filter-group">
+            {categories.map((c, i) => (
+              <button class={`filter-btn ${i === 0 ? 'active' : ''}`} data-filter={c}>{c}</button>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+
+        <div class="track-list" id="track-list">
+          {tracks.map((t) => (
+            <div class="track-card" data-category={t.category} data-src={t.src} data-title={t.title} data-cat={t.category}>
+              <div class="track-info">
+                <div class="track-tag">{t.category}</div>
+                <div class="track-name">{t.title}</div>
+                <div class="track-meta">{t.role} • {t.desc}</div>
+              </div>
+              <div class="play-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Yetkinlikler / Profil -->
+      <section>
+        <h2 class="section-title">Compétences & Environnement Technique</h2>
+        <div class="skills-grid">
+          {skills.map(s => (
+            <div class="skill-card">
+              <h3>{s.name}</h3>
+              <div class="skill-tags">
+                {s.items.map(item => (
+                  <span class="skill-tag">{item}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </main>
   </div>
 
-  <!-- Player Bar with Waveform Canvas -->
+  <!-- Player Bar -->
   <div class="player-bar">
     <div class="player-track-info">
       <span id="player-title" class="player-track-title">Sélectionnez une piste</span>
@@ -292,7 +492,7 @@ const tracks = [
     </div>
   </div>
 
-  <audio id="audio-engine" crossOrigin="anonymous" preload="metadata"></audio>
+  <audio id="audio-engine" preload="metadata"></audio>
 
   <script>
     const audio = document.getElementById('audio-engine');
@@ -309,21 +509,44 @@ const tracks = [
     const totalTimeEl = document.getElementById('total-time');
     const volumeSlider = document.getElementById('volume-slider');
     const trackCards = document.querySelectorAll('.track-card');
+    const filterBtns = document.querySelectorAll('.filter-btn');
 
     let audioCtx, analyser, dataArray;
     let isInitialized = false;
 
+    // Filter Logic
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.getAttribute('data-filter');
+
+        trackCards.forEach(card => {
+          if (filter === "Tous" || card.getAttribute('data-category') === filter) {
+            card.style.display = "flex";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      });
+    });
+
+    // Audio Visualizer
     function initAudioContext() {
       if (isInitialized) return;
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      analyser = audioCtx.createAnalyser();
-      analyser.fftSize = 64;
-      const source = audioCtx.createMediaElementSource(audio);
-      source.connect(analyser);
-      analyser.connect(audioCtx.destination);
-      dataArray = new Uint8Array(analyser.frequencyBinCount);
-      isInitialized = true;
-      draw();
+      try {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 64;
+        const source = audioCtx.createMediaElementSource(audio);
+        source.connect(analyser);
+        analyser.connect(audioCtx.destination);
+        dataArray = new Uint8Array(analyser.frequencyBinCount);
+        isInitialized = true;
+        draw();
+      } catch (e) {
+        // Fallback for strict browser policies
+      }
     }
 
     function resizeCanvas() {
@@ -340,19 +563,23 @@ const tracks = [
       const h = waveWrapper.clientHeight;
       ctx.clearRect(0, 0, w, h);
 
-      if (!isInitialized) return;
-      analyser.getByteFrequencyData(dataArray);
-
       const barCount = 36;
       const barWidth = (w / barCount) - 2;
 
+      if (isInitialized && !audio.paused) {
+        analyser.getByteFrequencyData(dataArray);
+      }
+
       for (let i = 0; i < barCount; i++) {
-        const val = dataArray[i % dataArray.length] / 255;
-        const barHeight = Math.max(3, val * (h - 6));
+        let val = 0.1;
+        if (isInitialized && !audio.paused) {
+          val = Math.max(0.1, dataArray[i % dataArray.length] / 255);
+        }
+        const barHeight = Math.max(4, val * (h - 6));
         const x = i * (barWidth + 2);
         const y = (h - barHeight) / 2;
 
-        ctx.fillStyle = audio.paused ? '#374151' : '#60a5fa';
+        ctx.fillStyle = audio.paused ? '#2a3038' : '#3b82f6';
         ctx.fillRect(x, y, barWidth, barHeight);
       }
     }
@@ -367,7 +594,7 @@ const tracks = [
     function togglePlay() {
       if (!audio.src) return;
       initAudioContext();
-      if (audioCtx.state === 'suspended') audioCtx.resume();
+      if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
 
       if (audio.paused) {
         audio.play();
@@ -385,7 +612,7 @@ const tracks = [
     trackCards.forEach(card => {
       card.addEventListener('click', () => {
         initAudioContext();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
+        if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
 
         const src = card.getAttribute('data-src');
         const title = card.getAttribute('data-title');
@@ -423,6 +650,8 @@ const tracks = [
     volumeSlider.addEventListener('input', (e) => {
       audio.volume = e.target.value;
     });
+
+    draw();
   </script>
 </body>
 </html>
