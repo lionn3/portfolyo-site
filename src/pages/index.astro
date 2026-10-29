@@ -1,0 +1,428 @@
+---
+const tracks = [
+  {
+    id: 1,
+    title: "Rocket Rat - Main Theme & Boss Battle",
+    category: "Game Audio / OST",
+    role: "Kompozisyon, Sentez & Miks (Ableton Live)",
+    duration: "02:14",
+    src: "/Gameplay_Release_Export_Loop.wav",
+    desc: "Retro-modern synthwave ve dinamik perküsyonlarla tasarlanmış boss savaşı müziği."
+  },
+  {
+    id: 2,
+    title: "Vocal Exploration & Acoustic Study",
+    category: "Acoustique / Recherche",
+    role: "Kompozisyon & Akustik Düzenleme",
+    duration: "01:45",
+    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+    desc: "Çağdaş vokal tınıları ve klasik form analizi üzerine deneysel çalışma."
+  },
+  {
+    id: 3,
+    title: "Modular Atmosphere & Ambient Loop",
+    category: "Sound Design / Ambient",
+    role: "SFX & Modüler Ses Tasarımı",
+    duration: "03:10",
+    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+    desc: "İzometrik keşif oyunları için kesintisiz döngüye uygun atmosferik katmanlar."
+  }
+];
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arhan Bora Egemen - Portfolio Audio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0b0d;
+      --card-bg: #121417;
+      --card-border: #1e2227;
+      --card-hover: #171a1f;
+      --accent: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.25);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      padding-bottom: 140px;
+    }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 4rem 1.5rem; }
+
+    header { margin-bottom: 3.5rem; }
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--accent);
+      border-radius: 9999px;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(59, 130, 246, 0.25);
+    }
+    h1 { font-size: 2.25rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+    p.lead { color: var(--text-muted); font-size: 1.05rem; max-width: 650px; }
+
+    h2.section-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 0.75rem;
+    }
+
+    .track-list { display: flex; flex-direction: column; gap: 1rem; }
+    .track-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .track-card:hover {
+      background: var(--card-hover);
+      border-color: #2e353f;
+      transform: translateY(-1px);
+    }
+    .track-card.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .track-info { flex: 1; }
+    .track-tag { font-size: 0.7rem; color: var(--accent); font-weight: 600; text-transform: uppercase; margin-bottom: 0.25rem; }
+    .track-name { font-size: 1.05rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.25rem; }
+    .track-meta { font-size: 0.825rem; color: var(--text-muted); }
+
+    .play-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #181b20;
+      border: 1px solid #2a3038;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+    .track-card:hover .play-btn {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* Alt Müzik Çalar & Waveform Alanı */
+    .player-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(14, 16, 20, 0.95);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid var(--card-border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      z-index: 100;
+    }
+
+    .player-track-info { width: 25%; min-width: 180px; }
+    .player-track-title { font-size: 0.9rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+    .player-track-category { font-size: 0.75rem; color: var(--text-muted); }
+
+    .player-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      max-width: 520px;
+      gap: 0.5rem;
+    }
+
+    .ctrl-btn.play-pause {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #fff;
+      color: #000;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s, background 0.2s;
+    }
+    .ctrl-btn.play-pause:hover { background: var(--accent); color: #fff; transform: scale(1.05); }
+
+    .waveform-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .wave-wrapper {
+      flex: 1;
+      height: 28px;
+      position: relative;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 4px;
+      cursor: pointer;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    canvas#waveform-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .wave-progress-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: rgba(59, 130, 246, 0.2);
+      border-right: 2px solid var(--accent);
+      pointer-events: none;
+    }
+
+    .volume-container {
+      width: 20%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    input[type=range] { accent-color: var(--accent); cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <span class="badge">Portfolio & Production Sonore</span>
+      <h1>Composition & Sound Design</h1>
+      <p class="lead">
+        Spécialisé dans la musique à l'image, le sound design interactif et la production musicale sous Ableton Live. Étudiant en Licence 3 de Musicologie à Sorbonne Université.
+      </p>
+    </header>
+
+    <main>
+      <h2 class="section-title">Sélection Audio & Références</h2>
+      <div class="track-list">
+        {tracks.map((t) => (
+          <div class="track-card" data-src={t.src} data-title={t.title} data-cat={t.category}>
+            <div class="track-info">
+              <div class="track-tag">{t.category}</div>
+              <div class="track-name">{t.title}</div>
+              <div class="track-meta">{t.role} • {t.desc}</div>
+            </div>
+            <div class="play-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            </div>
+          </div>
+        ))}
+      </div>
+    </main>
+  </div>
+
+  <!-- Player Bar with Waveform Canvas -->
+  <div class="player-bar">
+    <div class="player-track-info">
+      <span id="player-title" class="player-track-title">Sélectionnez une piste</span>
+      <span id="player-cat" class="player-track-category">Prêt</span>
+    </div>
+
+    <div class="player-controls">
+      <button id="btn-play" class="ctrl-btn play-pause">
+        <svg id="icon-play" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+        <svg id="icon-pause" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
+          <rect x="6" y="4" width="4" height="16"></rect>
+          <rect x="14" y="4" width="4" height="16"></rect>
+        </svg>
+      </button>
+
+      <div class="waveform-container">
+        <span id="current-time">0:00</span>
+        <div id="wave-wrapper" class="wave-wrapper">
+          <canvas id="waveform-canvas"></canvas>
+          <div id="wave-progress" class="wave-progress-overlay"></div>
+        </div>
+        <span id="total-time">0:00</span>
+      </div>
+    </div>
+
+    <div class="volume-container">
+      <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.8" style="width: 80px;" />
+    </div>
+  </div>
+
+  <audio id="audio-engine" crossOrigin="anonymous" preload="metadata"></audio>
+
+  <script>
+    const audio = document.getElementById('audio-engine');
+    const playBtn = document.getElementById('btn-play');
+    const iconPlay = document.getElementById('icon-play');
+    const iconPause = document.getElementById('icon-pause');
+    const playerTitle = document.getElementById('player-title');
+    const playerCat = document.getElementById('player-cat');
+    const waveProgress = document.getElementById('wave-progress');
+    const waveWrapper = document.getElementById('wave-wrapper');
+    const canvas = document.getElementById('waveform-canvas');
+    const ctx = canvas.getContext('2d');
+    const currentTimeEl = document.getElementById('current-time');
+    const totalTimeEl = document.getElementById('total-time');
+    const volumeSlider = document.getElementById('volume-slider');
+    const trackCards = document.querySelectorAll('.track-card');
+
+    let audioCtx, analyser, dataArray;
+    let isInitialized = false;
+
+    function initAudioContext() {
+      if (isInitialized) return;
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 64;
+      const source = audioCtx.createMediaElementSource(audio);
+      source.connect(analyser);
+      analyser.connect(audioCtx.destination);
+      dataArray = new Uint8Array(analyser.frequencyBinCount);
+      isInitialized = true;
+      draw();
+    }
+
+    function resizeCanvas() {
+      canvas.width = waveWrapper.clientWidth * window.devicePixelRatio;
+      canvas.height = waveWrapper.clientHeight * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function draw() {
+      requestAnimationFrame(draw);
+      const w = waveWrapper.clientWidth;
+      const h = waveWrapper.clientHeight;
+      ctx.clearRect(0, 0, w, h);
+
+      if (!isInitialized) return;
+      analyser.getByteFrequencyData(dataArray);
+
+      const barCount = 36;
+      const barWidth = (w / barCount) - 2;
+
+      for (let i = 0; i < barCount; i++) {
+        const val = dataArray[i % dataArray.length] / 255;
+        const barHeight = Math.max(3, val * (h - 6));
+        const x = i * (barWidth + 2);
+        const y = (h - barHeight) / 2;
+
+        ctx.fillStyle = audio.paused ? '#374151' : '#60a5fa';
+        ctx.fillRect(x, y, barWidth, barHeight);
+      }
+    }
+
+    function formatTime(sec) {
+      if (isNaN(sec)) return "0:00";
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return `${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    function togglePlay() {
+      if (!audio.src) return;
+      initAudioContext();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      if (audio.paused) {
+        audio.play();
+        iconPlay.style.display = 'none';
+        iconPause.style.display = 'block';
+      } else {
+        audio.pause();
+        iconPlay.style.display = 'block';
+        iconPause.style.display = 'none';
+      }
+    }
+
+    playBtn.addEventListener('click', togglePlay);
+
+    trackCards.forEach(card => {
+      card.addEventListener('click', () => {
+        initAudioContext();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const src = card.getAttribute('data-src');
+        const title = card.getAttribute('data-title');
+        const cat = card.getAttribute('data-cat');
+
+        trackCards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+
+        playerTitle.textContent = title;
+        playerCat.textContent = cat;
+
+        audio.src = src;
+        audio.play();
+        iconPlay.style.display = 'none';
+        iconPause.style.display = 'block';
+      });
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      if (audio.duration) {
+        const pct = (audio.currentTime / audio.duration) * 100;
+        waveProgress.style.width = `${pct}%`;
+        currentTimeEl.textContent = formatTime(audio.currentTime);
+        totalTimeEl.textContent = formatTime(audio.duration);
+      }
+    });
+
+    waveWrapper.addEventListener('click', (e) => {
+      if (!audio.duration) return;
+      const rect = waveWrapper.getBoundingClientRect();
+      const clickPos = (e.clientX - rect.left) / rect.width;
+      audio.currentTime = clickPos * audio.duration;
+    });
+
+    volumeSlider.addEventListener('input', (e) => {
+      audio.volume = e.target.value;
+    });
+  </script>
+</body>
+</html>
